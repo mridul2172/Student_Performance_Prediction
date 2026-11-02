@@ -1,125 +1,120 @@
-# 🎓 Student Performance Prediction
+# Fake Job & Internship Detection Using Machine Learning
 
-A Machine Learning project that analyzes student-related factors and classifies students into Low, Medium, and High performance levels using multiple classification algorithms.
+A Machine Learning project that classifies job postings as potentially fraudulent or non-fraudulent using four classification algorithms. The project compares model performance to understand which approach works best for identifying suspicious job postings.
 
-## 📌 Project Overview
+## Project Overview
 
-This project uses the **Student Performance Factors** dataset to explore the relationship between students' academic habits, educational support, and learning environment and their exam scores.
+Fake job postings can mislead job seekers and expose them to potential scams. This project uses historical job-posting data to learn patterns associated with fraudulent listings and predict whether an unseen posting is likely to be fraudulent.
 
-It applies data analysis, visualization, and Machine Learning classification techniques to predict student performance categories.
+**Project type:** Predictive Analytics / Machine Learning  
+**Task:** Binary Classification  
+**Language:** Python
 
-## 🎯 Objectives
+## Objectives
 
-- Analyze the distribution of students' exam scores.
-- Explore the relationship between study habits and exam performance.
-- Examine previous scores and current exam scores.
-- Analyze educational support and learning environment factors.
-- Train and compare multiple Machine Learning classification models.
+- Analyze and preprocess job-posting data.
+- Explore patterns in fraudulent and genuine job listings.
+- Train four machine learning classification models.
+- Compare model performance using standard evaluation metrics.
+- Identify the strengths and limitations of each classifier.
 
-## 📂 Project Structure
+## Dataset
 
-```text
-Student_Performance_Prediction/
-│
-├── data/
-│   └── StudentPerformanceFactors.csv
-│
-├── notebooks/
-│   └── Student_Performance_Prediction.ipynb
-│
-├── student_performance_prediction.py
-├── README.md
-├── requirements.txt
-└── .gitignore
-```
+**Dataset:** [Real or Fake? Fake Jobposting Prediction](https://www.kaggle.com/datasets/shivamb/real-or-fake-fake-jobposting-prediction)
 
-*Note: Update the file names in this structure if your actual repository uses different names.*
+The dataset contains approximately 17,880 job postings and 18 columns.
 
-## 📊 Dataset
-
-**Dataset:** Student Performance Factors
-
-The dataset includes information about:
-
-- Study hours and attendance
-- Sleep hours and physical activity
-- Previous scores
-- Parental involvement and access to resources
-- Teacher quality and tutoring sessions
-- Internet access, school type, and family income
-- Other student-related factors
-
-**Target variable:** `Performance_Level`
-
-The project defines three performance categories based on exam scores:
-
-| Performance Level | Exam Score |
+| Dataset information | Details |
 |---|---|
-| Low | 64 or below |
-| Medium | 65–69 |
-| High | 70 or above |
+| Total job postings | 17,880 |
+| Genuine postings | 17,014 |
+| Fraudulent postings | 866 |
+| Target column | `fraudulent` |
+| Classification type | Binary classification |
 
-These are project-defined categories, not official academic grades.
+Target labels:
 
-## 🛠️ Technologies Used
+- `0` — Non-fraudulent posting
+- `1` — Fraudulent posting
 
-- Python
-- Pandas
-- NumPy
-- Matplotlib
-- Scikit-learn
-- Jupyter Notebook
+The dataset is imbalanced, with fraudulent postings representing a small proportion of the records. Therefore, model evaluation considers precision, recall and F1-score in addition to accuracy.
 
-## ⚙️ Project Workflow
+## Machine Learning Models
 
-1. Load and inspect the dataset.
-2. Check missing values and duplicate records.
-3. Clean the dataset.
-4. Perform exploratory data analysis (EDA).
-5. Visualize exam score distributions.
-6. Analyze study habits and educational factors.
-7. Create performance categories.
-8. Encode categorical features.
-9. Split the dataset into training and testing sets.
-10. Apply feature scaling.
-11. Train and evaluate classification models.
-12. Compare model accuracy and analyze the confusion matrix.
+Four classification algorithms are implemented:
 
-## 🤖 Machine Learning Models
+1. **Logistic Regression** — A classification algorithm that estimates class probabilities.
+2. **Decision Tree Classifier** — Learns decision rules from job-posting features.
+3. **Random Forest Classifier** — Combines multiple decision trees to make predictions.
+4. **Linear Support Vector Classifier (LinearSVC)** — Learns a decision boundary to separate the classes.
 
-Four classification algorithms are used:
+All four models use the same stratified 80:20 train-test split, with `random_state=42`, and a consistent preprocessing pipeline.
 
-1. **Logistic Regression** — a classification algorithm that estimates class probabilities.
-2. **K-Nearest Neighbors (KNN)** — predicts classes using nearby training examples.
-3. **Gaussian Naive Bayes** — uses probability distributions and Bayes' theorem.
-4. **Random Forest** — combines multiple decision trees for classification.
+## Project Workflow
 
-## 📈 Model Evaluation
+### 1. Data Understanding
+- Inspect dataset dimensions, data types and columns.
+- Examine missing values and duplicate records.
+- Analyze the distribution of the target classes.
 
-The models are evaluated using:
+### 2. Exploratory Data Analysis
+- Compare genuine and fraudulent postings.
+- Investigate missing values.
+- Explore employment types and remote-work patterns.
+- Visualize relevant trends using charts.
 
-- Accuracy Score
+### 3. Data Preprocessing
+- Handle missing values.
+- Process categorical and numerical features.
+- Convert relevant text fields into numerical features where applicable.
+- Apply preprocessing consistently to avoid data leakage.
+
+### 4. Model Training
+Train the four classifiers using the prepared training data.
+
+### 5. Model Evaluation
+Compare the models using:
+- Accuracy
 - Precision
 - Recall
-- F1-Score
-- Confusion Matrix
+- F1-score
+- Confusion matrix
 
-The model with the highest test accuracy is selected as the best-performing model according to that metric.
+### 6. Model Comparison
+Present the evaluation results in a comparison table and visualizations to identify the most suitable model.
 
-*Actual model performance metrics should be added after running the notebook.*
+## Technology Stack
 
-## 🚀 Getting Started
+- Python
+- Pandas and NumPy
+- Scikit-learn
+- Matplotlib
+- Seaborn
+- Jupyter Notebook
+
+## Getting Started
+
+### Prerequisites
+
+Install Python 3 and Git. Download the dataset from the Kaggle link above.
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/mridul2172/Student_Performance_Prediction.git
+git clone https://github.com/mridul2172/fake-job-detection.git
+cd fake-job-detection
 ```
 
-### 2. Navigate to the project folder
+### 2. Create a virtual environment
 
 ```bash
-cd Student_Performance_Prediction
+python -m venv venv
+```
+
+Activate it on Windows:
+
+```bash
+venv\Scripts\activate
 ```
 
 ### 3. Install dependencies
@@ -128,48 +123,54 @@ cd Student_Performance_Prediction
 pip install -r requirements.txt
 ```
 
-### 4. Run the notebook
+### 4. Prepare the dataset
 
-Open Jupyter Notebook:
+Download the dataset from Kaggle and place the CSV file in the location expected by the notebook or training script. Verify the filename and dataset path before running the code.
 
-```bash
-jupyter notebook
-```
+### 5. Run the project
 
-Open the notebook inside the `notebooks/` directory and execute the cells in order.
+Open the Jupyter Notebook included in the repository and execute the cells in order.
 
-Alternatively, run the Python script:
+If your repository uses a Python script instead of a notebook, run the appropriate script for your project structure.
 
-```bash
-python student_performance_prediction.py
-```
+## Results and Evaluation
 
-Ensure the dataset path in the script matches your project folder structure.
+The four classifiers are evaluated on the same test set using consistent metrics.
 
-## 🔍 Key Learning Outcomes
+The final comparison should report the actual results produced by the code. No model is assumed to be the best before evaluation.
 
-- Data cleaning and preprocessing
-- Exploratory data analysis
-- Data visualization
-- Categorical feature encoding
-- Feature scaling
-- Classification model training
-- Model comparison and evaluation
+| Model | Accuracy | Precision | Recall | F1-score |
+|---|---|---|---|---|
+| Logistic Regression | Run evaluation | Run evaluation | Run evaluation | Run evaluation |
+| Decision Tree | Run evaluation | Run evaluation | Run evaluation | Run evaluation |
+| Random Forest | Run evaluation | Run evaluation | Run evaluation | Run evaluation |
+| LinearSVC | Run evaluation | Run evaluation | Run evaluation | Run evaluation |
 
-## ⚠️ Limitations
+Replace these placeholders with the actual evaluation results after running the project.
 
-- The performance categories are based on manually defined score thresholds.
-- The results depend on the dataset and selected features.
-- Observed relationships do not establish causation.
-- The model predicts performance categories rather than exact exam scores.
+## Limitations
 
-## 👨‍💻 Author
+- Model predictions depend on the quality and representativeness of the training data.
+- The dataset contains substantially more genuine postings than fraudulent postings.
+- New fraud patterns may differ from those in historical data.
+- A predicted fraudulent label is not proof that a job is fraudulent.
+- The model is intended for educational and research purposes, not as a definitive job-verification service.
 
-**Mridul Tiwari**
+## Future Improvements
 
-- GitHub: [@mridul2172](https://github.com/mridul2172)
-- Project Repository: [Student Performance Prediction](https://github.com/mridul2172/Student_Performance_Prediction)
+- Improve text feature extraction.
+- Evaluate class-imbalance handling techniques.
+- Add explainability for model predictions.
+- Test performance on newer job-posting data.
+- Improve the model comparison and reporting process.
+
+## Academic Purpose
+
+This project demonstrates the application of Predictive Analytics concepts, including data preprocessing, exploratory data analysis, classification algorithms and model performance evaluation.
+
+**Author:** Mridul Tiwari  
+**GitHub:** [mridul2172](https://github.com/mridul2172)
 
 ---
 
-⭐ If you find this project useful, consider giving the repository a star!
+*Disclaimer: This project is for educational purposes only. Predictions should not be treated as definitive evidence that a job posting is genuine or fraudulent.*
